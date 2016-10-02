@@ -1,0 +1,6 @@
+'DRKTettnang.OperationHistory:Plugin':
+  superTypes:
+    'TYPO3.Neos:Plugin': TRUE
+  ui:
+    label: 'Einsatzübersicht'
+    group: 'plugins'

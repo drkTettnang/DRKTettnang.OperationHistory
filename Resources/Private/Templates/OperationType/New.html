@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+<f:section name="Title">New operation type</f:section>
+
+<f:section name="Content">
+    <p>Just fill out the following form to create a new operation type:</p>
+
+    <f:form action="create" objectName="newOperationType">
+        <ol>
+            <li>
+                <label for="id">Id</label>
+                <f:form.textfield property="id" id="id" />
+            </li>
+            
+            <li>
+                <label for="label">Label</label>
+                <f:form.textfield property="label" id="label" />
+            </li>
+        
+            <li>
+                <f:form.submit value="Create" />
+            </li>
+        </ol>
+    </f:form>
+</f:section>

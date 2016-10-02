@@ -1,0 +1,32 @@
+-
+  uriPattern: 'new.{@format}'
+  defaults:
+    '@package': 'DRKTettnang.OperationHistory'
+    '@controller': 'Operation'
+    '@action': 'new'
+    '@format': 'html'
+-
+  name: 'List Operation'
+  uriPattern: '{year}.{@format}'
+  defaults:
+    '@package': 'DRKTettnang.OperationHistory'
+    '@controller': 'Operation'
+    '@action': 'index'
+    '@format': 'html'
+-
+  uriPattern: ''
+  defaults:
+    '@package': 'DRKTettnang.OperationHistory'
+    '@controller': 'Operation'
+    '@action': 'index'
+-
+  name: 'Operation'
+  uriPattern: '{operation}(/{@action}).{@format}'
+  defaults:
+    '@package': 'DRKTettnang.OperationHistory'
+    '@controller': 'Operation'
+    '@action': 'show'
+    '@format': 'html'
+  routeParts:
+    'operation':
+      handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'

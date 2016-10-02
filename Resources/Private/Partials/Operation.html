@@ -1,0 +1,60 @@
+{namespace media=TYPO3\Media\ViewHelpers}
+<div class="operation animatedParent animateOnce">
+	<h1 class="type">
+		<span class="number animated growIn">
+			#{operation.number}
+		</span>
+		
+		{operation.type.label}
+	</h1>
+
+	<div class="body">
+		<p class="description">
+			{operation.description -> f:format.htmlspecialchars() -> f:format.raw()} <!-- -> drk:format.linebreak() -->
+		</p>
+		
+		<f:if condition="{operation.images}">
+			<div class="images gallery">
+	         <f:for each="{operation.images}" as="image">
+	            <a href="{media:uri.image(asset: image, maximumHeight: 2000, maximumWidth: 2000, allowCropping: false)}" 
+	               data-bg-url-max="{media:uri.image(asset: image, maximumWidth: 720, allowCropping: false)}" 
+	               data-bg-url-square="{media:uri.image(asset: image, height: 720, width: 720, allowCropping: true)}" 
+	               data-bg-url-large="{media:uri.image(asset: image, height: 150, width: 720, allowCropping: true)}" 
+	               data-bg-url-medium="{media:uri.image(asset: image, height: 130, width: 240, allowCropping: true)}" 
+	               style="background-image:url({media:uri.image(asset: image, height: 120, width: 120, allowCropping: true)})"></a>
+	         </f:for>
+	      </div> 
+		</f:if>
+	</div>
+
+	<div class="footer">
+		<div class="location">
+			<span class="fa fa-map-marker"></span> {operation.location -> f:format.htmlspecialchars()}
+		</div>
+
+		<div class="date">
+			<span class="fa fa-calendar"></span> {operation.date -> f:format.date(cldrFormat: 'd. MMM, H:mm', forceLocale:'de_DE')}
+		</div>
+		
+		<div style="clear:both"></div>
+		
+		<f:if condition="{operation.bos}">
+			<!--<br />-->
+			<div class="bos">
+				<f:for each="{operation.bos}" key="b" as="bos" iteration="iterator">
+					<div class="icon icon-{bos.name}" title="drk:operationBos(key: bos)" data-toggle="tooltip" data-placement="bottom">{bos.name}</div>
+				</f:for>
+			</div>
+		</f:if>
+		
+		<div style="clear:both"></div>
+	</div>
+   
+   <div>
+		<f:link.action action="show" arguments="{operation: operation}">Show</f:link.action> 
+      <f:link.action action="edit" arguments="{operation: operation}">Edit</f:link.action>
+      <f:form action="delete" arguments="{operation: operation}">
+          <f:form.submit value="Delete" />
+      </f:form>
+   </div>
+</div>

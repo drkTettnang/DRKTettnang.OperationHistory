@@ -1,0 +1,11 @@
+privilegeTargets:
+  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+    'DRKTettnang.OperationHistory:StandardControllerActions':
+      matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation|OperationBos|OperationType)Controller->(index|show|new|create|edit|update|delete|upload|upload2)Action())'
+
+roles:
+  'TYPO3.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'DRKTettnang.OperationHistory:StandardControllerActions'
+        permission: GRANT

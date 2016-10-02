@@ -1,0 +1,28 @@
+{namespace media=TYPO3\Media\ViewHelpers}
+
+
+    <f:if condition="{operations}">
+        <f:then>
+               <f:widget.paginate objects="{operations}" as="os" configuration="{itemsPerPage: 2}">
+                  <f:for each="{os}" as="operation">
+                    <f:render partial="Operation" arguments="{operation:operation}" />
+                  </f:for>
+               </f:widget.paginate> 
+               <f:comment>
+                <f:for each="{operations}" as="operation">
+                  <f:render partial="Operation" arguments="{operation:operation}" />
+                </f:for>
+                </f:comment>
+        </f:then>
+        <f:else>
+            <p>No operations created yet.</p>
+        </f:else>
+    </f:if>
+    <p><f:link.action action="new">Create a new operation</f:link.action></p>
+    
+    <f:for each="{years}" as="year">
+      <f:link.action action="index" arguments="{year: year}">{year}</f:link.action>,
+   </f:for>
+   
+   <p><f:link.action controller="operationBos" action="index">Show BOS</f:link.action> 
+      <f:link.action controller="operationType" action="index">Show types</f:link.action></p>

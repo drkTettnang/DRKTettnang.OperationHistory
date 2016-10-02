@@ -1,0 +1,18 @@
+{
+    "description": "Add description here",
+    "type": "neos-package",
+    "require": {
+        "typo3/flow": "*"
+    },
+    "name": "drktettnang/operationhistory",
+    "autoload": {
+        "psr-0": {
+            "DRKTettnang\\OperationHistory": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "DRKTettnang.OperationHistory"
+        }
+    }
+}
