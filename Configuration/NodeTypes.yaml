@@ -1,12 +1,13 @@
+
 'DRKTettnang.OperationHistory:Plugin':
   superTypes:
-    'TYPO3.Neos:Plugin': TRUE
+    'TYPO3.Neos:Plugin': '1'
   ui:
-    label: 'Einsatzübersicht'
-    group: 'plugins'
+    label: Einsatzübersicht
+    group: plugins
 'DRKTettnang.OperationHistory:PluginLast':
   superTypes:
-    'TYPO3.Neos:Plugin': TRUE
+    'TYPO3.Neos:Plugin': '1'
   ui:
     label: 'Letzter Einsatz'
-    group: 'plugins'
+    group: plugins
