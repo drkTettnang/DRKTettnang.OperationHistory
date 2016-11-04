@@ -1,0 +1,12 @@
+{namespace media=TYPO3\Media\ViewHelpers}
+
+    <f:if condition="{operations}">
+        <f:then>
+                <f:for each="{operations}" as="operation">
+                    <f:render partial="Operation" arguments="{operation:operation}" />
+                </f:for>
+        </f:then>
+        <f:else>
+            <p>Keine Einsätze eingetragen.</p>
+        </f:else>
+    </f:if>

@@ -1,4 +1,5 @@
 {namespace media=TYPO3\Media\ViewHelpers}
+{namespace drk=DRKTettnang\Homepage\ViewHelpers}
 <div class="operation animatedParent animateOnce">
 	<h1 class="type">
 		<span class="number animated growIn">
@@ -42,7 +43,7 @@
 			<!--<br />-->
 			<div class="bos">
 				<f:for each="{operation.bos}" key="b" as="bos" iteration="iterator">
-					<div class="icon icon-{bos.name}" title="drk:operationBos(key: bos)" data-toggle="tooltip" data-placement="bottom">{bos.name}</div>
+					<div class="icon icon-{bos.name -> drk:format.cssClass()}" title="{bos.name}" data-toggle="tooltip" data-placement="bottom"></div>
 				</f:for>
 			</div>
 		</f:if>
@@ -50,11 +51,13 @@
 		<div style="clear:both"></div>
 	</div>
    
-   <div>
-		<f:link.action action="show" arguments="{operation: operation}">Show</f:link.action> 
-      <f:link.action action="edit" arguments="{operation: operation}">Edit</f:link.action>
-      <f:form action="delete" arguments="{operation: operation}">
-          <f:form.submit value="Delete" />
-      </f:form>
-   </div>
+	<f:security.ifHasRole role="Moderator">
+	   <div class="controls">
+			<f:link.action action="show" arguments="{operation: operation}"><i class="fa fa-eye" aria-hidden="true"></i> Details</f:link.action> 
+	      <f:link.action action="edit" arguments="{operation: operation}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Bearbeiten</f:link.action>
+	      <f:form action="delete" arguments="{operation: operation}">
+	          <f:form.button class="deleteOperation"><i class="fa fa-trash" aria-hidden="true"></i> Löschen</f:form.button>
+	      </f:form>
+	   </div>
+	</f:security.ifHasRole>
 </div>

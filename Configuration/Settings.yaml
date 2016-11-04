@@ -1,0 +1,7 @@
+TYPO3:
+  Flow:
+    security:
+      authentication:
+        providers:
+          Typo3BackendProvider:
+            provider: 'PersistedUsernamePasswordProvider'

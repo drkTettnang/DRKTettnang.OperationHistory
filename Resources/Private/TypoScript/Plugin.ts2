@@ -4,3 +4,10 @@ prototype(DRKTettnang.OperationHistory:Plugin) {
       controller = 'Operation'
       action = 'index'
 }
+
+prototype(DRKTettnang.OperationHistory:PluginLast) < prototype(TYPO3.Neos:Plugin)
+prototype(DRKTettnang.OperationHistory:PluginLast) {
+      package = 'DRKTettnang.OperationHistory'
+      controller = 'Operation'
+      action = 'showLatest'
+}

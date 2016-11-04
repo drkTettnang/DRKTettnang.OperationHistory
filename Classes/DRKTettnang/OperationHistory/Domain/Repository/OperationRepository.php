@@ -84,32 +84,52 @@ class OperationRepository extends Repository
       return (count($result) >= $number)?$result[$number - 1]:null;
    }
    
-   public function findByYear($year, $limit = null, $offset = 0) {
-      /** @var QueryBuilder $queryBuilder */
-      $queryBuilder = $this->entityManager->createQueryBuilder();
-      $queryBuilder
-            ->select('o')
-            ->from($this->getEntityClassName(), 'o')
-            ->where('o.year = :year')
-            ->orderBy('o.date', 'DESC');
-
-      if (is_numeric($limit)) {
-         $queryBuilder->setMaxResults($limit);
-      }
-      $queryBuilder->setFirstResult($offset);
+   public function findByYear($year) {
+      $query = $this->createQuery();
       
-      $queryBuilder->setParameter('year', $year);
+      return
+         $query->matching(
+            $query->equals('year', $year)
+         )
+         ->setOrderings(array('date' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
+         ->execute();
+   }
+   
+   public function findLatest() {
       
       $query = $this->createQuery();
-                return
-                        $query->matching(
-                                $query->equals('year', $year)
-                        )
-                        ->setOrderings(array('date' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
-                        ->execute();
+      $query
+         ->setOrderings(array('date' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
+         ->setLimit(1);
       
-      $result = $queryBuilder->getQuery()->getResult();
+      return $query->execute()->getFirst();
+   }
+   
+   public function getTypeStatisticByYear($year) {
+
+      $rsm = new ResultSetMapping();
+      $rsm->addScalarResult('count', 'count');
+      $rsm->addScalarResult('label', 'label');
       
-      return $result;
+      $queryString = 'SELECT label, count(*) as count FROM `drktettnang_operationhistory_domain_model_operationtype` t JOIN drktettnang_operationhistory_domain_model_operation o ON o.type = t.persistence_object_identifier WHERE o.year = :year GROUP BY o.type';
+      
+      $query = $this->entityManager->createNativeQuery($queryString, $rsm);
+      $query->setParameter('year', $year);
+
+      return $query->getResult();
+   }
+   
+   public function getOldOperations() {
+      $rsm = new ResultSetMapping();
+      $rsm->addScalarResult('properties', 'properties');
+
+      $query = $this->entityManager->createNativeQuery('SELECT properties FROM typo3_typo3cr_domain_model_nodedata WHERE nodetype = ? LIMIT 5', $rsm);
+      $query->setParameter(1, 'DRKTettnang.Homepage:Operation');
+
+      $result = $query->getResult();
+
+      return array_map(function ($r){
+         return json_decode($r['properties']);
+      }, $result);
    }
 }

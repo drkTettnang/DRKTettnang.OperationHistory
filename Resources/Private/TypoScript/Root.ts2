@@ -4,7 +4,6 @@ include: Plugin.ts2
 json = TYPO3.TypoScript:Case {
         operation {
                 condition = true
-                #${q(node).is('[instanceof TYPO3.Neos:Plugin]')}
                 type = 'DRKTettnang.OperationHistory:Operation.Json'
         }
 }
@@ -21,6 +20,3 @@ prototype(DRKTettnang.OperationHistory:Operation.Json) < prototype(TYPO3.TypoScr
            format = 'json'
         }
 }
-/*
-json < page
-json.body.brand = "TEST TEST"*/

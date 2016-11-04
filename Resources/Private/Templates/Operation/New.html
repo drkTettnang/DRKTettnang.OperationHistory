@@ -1,98 +1,85 @@
+<h1>Neuen Einsatz eintragen</h1>
 
-    <p>Just fill out the following form to create a new operation:</p>
+<p>Fülle einfach das folgende Formular aus um einen neuen Einsatz einzutragen.</p>
 
-    <f:form class="form-horizontal" action="create" objectName="newOperation" enctype="multipart/form-data">
+<f:form class="form-horizontal" id="operationForm" action="create" objectName="newOperation" enctype="multipart/form-data">
 
-       <div class="form-group">
-          <label for="description" class="col-sm-4 control-label">Beschreibung</label>
-          <div class="col-sm-8">
-             <f:form.textfield property="description" id="description" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="type" class="col-sm-4 control-label">Art</label>
-          <div class="col-sm-8">
-             <f:form.select property="type" options="{operationTypes}" optionLabelField="label" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="location" class="col-sm-4 control-label">Ort</label>
-          <div class="col-sm-8">
-             <f:form.textfield property="location" id="location" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="bos" class="col-sm-4 control-label">Weitere Kräfte</label>
-          <div class="col-sm-8">
-             <f:for each="{operationBos}" as="bos">
-               <f:form.checkbox property="bos" multiple="true" value="{bos}" id="{bos.name}" />
-               <label for="{bos.name}">{bos.name}</label>
-             </f:for>
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="date" class="col-sm-4 control-label">Datum</label>
-          <div class="col-sm-8">
-             <f:form.textfield type="datetime" value="01.12.2013 12:44" property="date" id="date" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-8">
-             <button type="submit" class="btn btn-primary">Neu</button>
-             
-             <input type="hidden" name="--drktettnang_operationhistory-plugin[images]" value="" id="imagesInput"/>
-          </div>
-       </div>
-    </f:form>
-    
-    <f:form actionUri="/aktiv-werden/einsatz-plugin/upload.json" method="post" object="{image}" objectName="image"
-        enctype="multipart/form-data" package="DRKTettnang.OperationHistory" controller="Operation" action="upload" format="json">
-        <input type="file" id="uploadForm" name="image[resource]" multiple="true" />
-       <!-- <f:form.upload id="uploadFor" property="resource" additionalAttributes="{multiple: true}" />
-        <f:form.submit value="Upload"></f:form.submit> -->
-     </f:form>
-     
-     <div id="uploaded"></div>
+    <div class="form-group">
+        <label for="type" class="col-sm-4 control-label">Art</label>
+        <div class="col-sm-8">
+            <f:form.select property="type" options="{operationTypes}" class="form-control" optionLabelField="label" />
+        </div>
+    </div>
 
-     <script src="{f:uri.resource(path: '/Libraries/jQuery/jquery-2.0.2.min.js', package: 'TYPO3.Twitter.Bootstrap')}"></script>
-  	<script src="{f:uri.resource(path: 'Vendor/_vendor.min.js', package: 'DRKTettnang.Homepage')}"></script>
+    <div class="form-group">
+        <label for="date" class="col-sm-4 control-label">Datum</label>
+        <f:form.hidden property="date" id="datetime" additionalAttributes="{required: required}" />
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-xs-7 date">
+                    <input type="text" id="date" class="form-control" required="required" />
+                </div>
+                <div class="col-xs-5">
+                    <input type="text" id="time" class="form-control exacttime" required="required" />
+                </div>
+            </div>
+        </div>
+    </div>
 
-     <script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.ui/jquery-ui.min.js')}"></script>
-     <script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.fileupload/jquery.fileupload.js')}"></script>
-     <script>
-     var uploadImages = [];
-     $('#uploadForm').fileupload({
-        dataType: 'json',
-        url: $('#uploadForm').attr('action'),
-        limitMultiFileUploads: 1
-     });
-     $('#uploadForm').on('fileuploadadd', function(ev, data){
-        console.log('add', data)
-        var div = $('<div>');
-        div.css({
-           width: '100px',
-           height: '100px',
-           'background-color': 'blue'
-        });
-        data.thumbnailElement = div;
-        $('#uploaded').append(div);
-     });
-     $('#uploadForm').on('fileuploaddone', function(ev, data){
-        /*result = data.result.replace(/&quot;/g, '"');
-        result = JSON.parse(result);*/
-        result = data.result;
-        console.log('done', data)
-        var img = $('<img>');
-        img.attr('src', result.files[0].thumbnailurl);
-        img.css('margin-right', '3px');
-        data.thumbnailElement.append(img);
-        
-        uploadImages.push(result.files[0].identifier);
-        $('#imagesInput').val(JSON.stringify(uploadImages));
-     });
-     </script>
+    <div class="form-group">
+        <label for="location" class="col-sm-4 control-label">Ort</label>
+        <div class="col-sm-8">
+            <f:form.textfield property="location" id="location" class="form-control" additionalAttributes="{required: required}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="uploadForm" class="col-sm-4 control-label">Fotos</label>
+        <div class="col-sm-8">
+            <div id="uploaded"></div>
+
+            <button type="button" id="uploadFormButton" class="btn btn-default"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Beschreibung</label>
+        <div class="col-sm-8">
+            <f:form.textarea rows="5" property="description" id="description" class="form-control" additionalAttributes="{required: required}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="bos" class="col-sm-4 control-label">Weitere Kräfte</label>
+        <div class="col-sm-8 operationBos">
+            <f:for each="{operationBos}" as="bos">
+                <div class="checkbox-inline">
+                    <label>
+                  <f:form.checkbox property="bos" multiple="true" value="{bos}" id="{bos.name}" />
+               <span>{bos.name}</span></label>
+                </div>
+            </f:for>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="button" class="goback btn btn-default"><i class="fa fa-ban" aria-hidden="true"></i> Abbrechen</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Neuen Einsatz speichern</button>
+
+            <f:form.hidden name="images" id="imagesInput" />
+        </div>
+    </div>
+</f:form>
+
+<form action="upload.json" id="uploadForm" method="post" enctype="multipart/form-data" class="hidden">
+    <input type="hidden" name="protection" value="{csrfProtectionToken}" />
+    <input type="file" name="image[resource]" multiple="true" />
+</form>
+
+<script src="{f:uri.resource(path: '/Libraries/jQuery/jquery-2.0.2.min.js', package: 'TYPO3.Twitter.Bootstrap')}"></script>
+<script src="{f:uri.resource(path: 'Vendor/_vendor.min.js', package: 'DRKTettnang.Homepage')}"></script>
+
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.ui/jquery-ui.min.js')}"></script>
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.fileupload/jquery.fileupload.js')}"></script>
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Javascripts/operation.form.js')}"></script>

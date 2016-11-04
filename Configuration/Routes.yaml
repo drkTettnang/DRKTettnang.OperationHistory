@@ -9,105 +9,124 @@
   routeParts:
     node:
       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-# -
-#   name: 'New Plugin Route'
-#   uriPattern: '{node}/new.{@format}'
-#   defaults:
-#     '@package': 'TYPO3.Neos'
-#     '@controller': 'Frontend\Node'
-#     '@format': 'html'
-#     '@action': 'show'
-#     '--drktettnang_operationhistory-plugin':
-#       '@package': 'DRKTettnang.OperationHistory'
-#       '@controller': 'Operation'
-#       '@action': 'new'
-#       '@format': 'html'
-#   routeParts:
-#     node:
-#       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-#   appendExceedingArguments: TRUE
-# -
-#   name: 'Operation Upload Route'
-#   uriPattern: '{node}/upload.{@format}'
-#   defaults:
-#     '@package': 'TYPO3.Neos'
-#     '@controller': 'Frontend\Node'
-#     '@format': 'json'
-#     '@action': 'show'
-#     '--drktettnang_operationhistory-plugin':
-#       '@package': 'DRKTettnang.OperationHistory'
-#       '@controller': 'Operation'
-#       '@action': 'upload'
-#       '@format': 'json'
-#   routeParts:
-#     node:
-#       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-# -
-#   name: 'Year Route'
-#   uriPattern: '{node}(/~/{--drktettnang_operationhistory-plugin.year}).{@format}'
-#   defaults:
-#     '@package': 'TYPO3.Neos'
-#     '@controller': 'Frontend\Node'
-#     '@format': 'html'
-#     '@action': 'show'
-#     '--drktettnang_operationhistory-plugin':
-#       '@package': 'DRKTettnang.OperationHistory'
-#       '@controller': 'Operation'
-#       '@action': 'index'
-#       '@format': 'html'
-#   routeParts:
-#     node:
-#       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-# #    '--drktettnang_operationhistory-plugin.operation':
-# #      handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
-# -
-#   name: 'Operation Route'
-#   uriPattern: '{node}/~/{--drktettnang_operationhistory-plugin.operation}(/{--drktettnang_operationhistory-plugin.@action}).{@format}'
-#   defaults:
-#     '@package': 'TYPO3.Neos'
-#     '@controller': 'Frontend\Node'
-#     '@format': 'html'
-#     '@action': 'show'
-#     '--drktettnang_operationhistory-plugin':
-#       '@package': 'DRKTettnang.OperationHistory'
-#       '@controller': 'Operation'
-#       '@action': 'show'
-#       '@format': 'html'
-#   routeParts:
-#     node:
-#       handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
-#     '--drktettnang_operationhistory-plugin.operation':
-#       handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
-
+  appendExceedingArguments: TRUE
 -
-  uriPattern: 'new.{@format}'
+  name: 'New Plugin Route'
+  uriPattern: '{node}/new.{@format}'
   defaults:
-    '@package': 'DRKTettnang.OperationHistory'
-    '@controller': 'Operation'
-    '@action': 'new'
+    '@package': 'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
     '@format': 'html'
--
-  name: 'List Operation'
-  uriPattern: '{year}.{@format}'
-  defaults:
-    '@package': 'DRKTettnang.OperationHistory'
-    '@controller': 'Operation'
-    '@action': 'index'
-    '@format': 'html'
--
-  uriPattern: ''
-  defaults:
-    '@package': 'DRKTettnang.OperationHistory'
-    '@controller': 'Operation'
-    '@action': 'index'
--
-  name: 'Operation'
-  uriPattern: '{operation}(/{@action}).{@format}'
-  defaults:
-    '@package': 'DRKTettnang.OperationHistory'
-    '@controller': 'Operation'
     '@action': 'show'
-    '@format': 'html'
+    '--drktettnang_operationhistory-plugin':
+      '@package': 'DRKTettnang.OperationHistory'
+      '@controller': 'Operation'
+      '@action': 'new'
+      '@format': 'html'
   routeParts:
-    'operation':
+    node:
+      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+  appendExceedingArguments: TRUE
+-
+  name: 'Import Plugin Route'
+  uriPattern: '{node}/import.{@format}'
+  defaults:
+    '@package': 'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
+    '@format': 'html'
+    '@action': 'show'
+    '--drktettnang_operationhistory-plugin':
+      '@package': 'DRKTettnang.OperationHistory'
+      '@controller': 'Operation'
+      '@action': 'import'
+      '@format': 'html'
+  routeParts:
+    node:
+      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+  appendExceedingArguments: TRUE
+-
+  name: 'Login Helper Route'
+  uriPattern: '{node}/login.html'
+  defaults:
+    '@package': 'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
+    '@format': 'html'
+    '@action': 'show'
+    '--drktettnang_operationhistory-plugin':
+      '@package': 'DRKTettnang.OperationHistory'
+      '@controller': 'Operation'
+      '@action': 'login'
+      '@format': 'html'
+  routeParts:
+    node:
+      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+  appendExceedingArguments: TRUE
+-
+  name: 'Year Route'
+  uriPattern: '{node}(/~/{--drktettnang_operationhistory-plugin.year}).{@format}'
+  defaults:
+    '@package': 'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
+    '@format': 'html'
+    '@action': 'show'
+    '--drktettnang_operationhistory-plugin':
+      '@package': 'DRKTettnang.OperationHistory'
+      '@controller': 'Operation'
+      '@action': 'index'
+      '@format': 'html'
+  routeParts:
+    node:
+      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+#    '--drktettnang_operationhistory-plugin.operation':
+#      handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
+-
+  name: 'Operation Route'
+  uriPattern: '{node}/~/{--drktettnang_operationhistory-plugin.operation}(/{--drktettnang_operationhistory-plugin.@action}).{@format}'
+  defaults:
+    '@package': 'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
+    '@format': 'html'
+    '@action': 'show'
+    '--drktettnang_operationhistory-plugin':
+      '@package': 'DRKTettnang.OperationHistory'
+      '@controller': 'Operation'
+      '@action': 'show'
+      '@format': 'html'
+  routeParts:
+    node:
+      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+    '--drktettnang_operationhistory-plugin.operation':
       handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
+
+# -
+#   uriPattern: 'new.{@format}'
+#   defaults:
+#     '@package': 'DRKTettnang.OperationHistory'
+#     '@controller': 'Operation'
+#     '@action': 'new'
+#     '@format': 'html'
+# -
+#   name: 'List Operation'
+#   uriPattern: '{year}.{@format}'
+#   defaults:
+#     '@package': 'DRKTettnang.OperationHistory'
+#     '@controller': 'Operation'
+#     '@action': 'index'
+#     '@format': 'html'
+# -
+#   uriPattern: ''
+#   defaults:
+#     '@package': 'DRKTettnang.OperationHistory'
+#     '@controller': 'Operation'
+#     '@action': 'index'
+# -
+#   name: 'Operation'
+#   uriPattern: '{operation}(/{@action}).{@format}'
+#   defaults:
+#     '@package': 'DRKTettnang.OperationHistory'
+#     '@controller': 'Operation'
+#     '@action': 'show'
+#     '@format': 'html'
+#   routeParts:
+#     'operation':
+#       handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'

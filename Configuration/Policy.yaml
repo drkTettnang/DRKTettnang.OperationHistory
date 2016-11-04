@@ -1,11 +1,27 @@
 privilegeTargets:
   TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
-    'DRKTettnang.OperationHistory:StandardControllerActions':
-      matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation|OperationBos|OperationType)Controller->(index|show|new|create|edit|update|delete|upload|upload2)Action())'
-
+    'DRKTettnang.OperationHistory:ReadControllerActions':
+      matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation)Controller->(index|show|showLatest|upload)Action())'
+    'DRKTettnang.OperationHistory:DestructiveControllerActions':
+      matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation|OperationBos|OperationType)Controller->(new|create|edit|update|delete|upload|upload2|index|login)Action())'
+    'DRKTettnang.OperationHistory:AdminControllerActions':
+      matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation)Controller->(import)Action())'
 roles:
   'TYPO3.Flow:Everybody':
     privileges:
       -
-        privilegeTarget: 'DRKTettnang.OperationHistory:StandardControllerActions'
+        privilegeTarget: 'DRKTettnang.OperationHistory:ReadControllerActions'
         permission: GRANT
+  'DRKTettnang.OperationHistory:Moderator':
+    privileges:
+      -
+        privilegeTarget: 'DRKTettnang.OperationHistory:ReadControllerActions'
+        permission: GRANT
+      -
+         privilegeTarget: 'DRKTettnang.OperationHistory:DestructiveControllerActions'
+         permission: GRANT
+  'TYPO3.Neos:Administrator':
+     privileges:
+        -
+           privilegeTarget: 'DRKTettnang.OperationHistory:AdminControllerActions'
+           permission: GRANT

@@ -1,120 +1,94 @@
 {namespace media=TYPO3\Media\ViewHelpers}
-<f:layout name="Default" />
 
-<f:section name="Title">Edit operation</f:section>
+<h1>Einsatz bearbeiten</h1>
 
-<f:section name="Content">
-    <p>Just fill out the following form to create a new operation:</p>
+<p>Ändere einfach die entsprechenden Daten um diesen Einsatz zu bearbeiten.</p>
 
-    <f:form class="form-horizontal" action="update" object="{operation}" objectName="operation">
+<f:form class="form-horizontal" id="operationForm" action="update" object="{operation}" objectName="operation" enctype="multipart/form-data">
 
-       <div class="form-group">
-          <label for="description" class="col-sm-4 control-label">Beschreibung</label>
-          <div class="col-sm-8">
-             <f:form.textfield property="description" id="description" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="type" class="col-sm-4 control-label">Art</label>
-          <div class="col-sm-8">
-             <f:form.select property="type" options="{operationTypes}" optionLabelField="label" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="location" class="col-sm-4 control-label">Ort</label>
-          <div class="col-sm-8">
-             <f:form.textfield property="location" id="location" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="bos" class="col-sm-4 control-label">Weitere Kräfte</label>
-          <div class="col-sm-8">
-             <f:for each="{operationBos}" as="bos">
-               <f:form.checkbox property="bos" checked="{bos.checked}" multiple="true" value="{bos}" id="{bos -> f:format.identifier()}" />
-               <label for="{bos -> f:format.identifier()}">{bos.name}</label>
-             </f:for>
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <label for="date" class="col-sm-4 control-label">Datum</label>
-          <div class="col-sm-8">
-             <f:form.textfield type="datetime" property="date" value="{operation.date -> f:format.date( format: 'd.m.Y H:i' )}" id="date" class="form-control" additionalAttributes="{required: required}" />
-          </div>
-       </div>
-       
-       <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-8">
-             <button type="submit" class="btn btn-primary">Update</button>
-             
-             <input type="hidden" name="images" value="{images}" id="imagesInput"/>
-          </div>
-       </div>
-    </f:form>
-    
-    <f:form method="post" action="upload" object="{image}" objectName="image"
-        enctype="multipart/form-data">
-        <f:form.upload id="uploadForm" property="resource" additionalAttributes="{multiple: true}" />
-     </f:form>
-     
-     <div id="uploaded">
-        <f:for each="{operation.images}" as="image">
-           <img src="{media:uri.image(asset: image, maximumHeight: 100, maximumWidth: 100, allowCropping: true)}" alt="" />
-        </f:for>
-     </div>
-     
-     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.fileupload.min.js"></script>
-     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.fileupload-process.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.fileupload-image.min.js"></script>-->
-     <script>
-     /*$('#uploadForm').on('change', function(){
-        var form = $(this);
-        $.each(form[0].files, function(){
-           var file = this;
-           var data = {};
-           data[form.attr('name')] = file;
-           
-           $.ajax({
-             data: data,
-             url: form.attr('action')
-          });
-        });
-     });*/
-     
-     var uploadImages = [];
-     $('#uploadForm').fileupload({
-        dataType: 'json',
-        url: $('#uploadForm').attr('action'),
-        limitMultiFileUploads: 1
-     });
-     $('#uploadForm').on('fileuploadadd', function(ev, data){
-        console.log('add', data)
-        var div = $('<div>');
-        div.css({
-           width: '100px',
-           height: '100px',
-           'background-color': 'blue'
-        });
-        data.thumbnailElement = div;
-        $('#uploaded').append(div);
-     });
-     $('#uploadForm').on('fileuploaddone', function(ev, data){
-        /*result = data.result.replace(/&quot;/g, '"');
-        result = JSON.parse(result);*/
-        result = data.result;
-        console.log('done', data)
-        var img = $('<img>');
-        img.attr('src', result.files[0].thumbnailurl);
-        img.css('margin-right', '3px');
-        data.thumbnailElement.append(img);
-        
-        uploadImages.push(result.files[0].identifier);
-        $('#imagesInput').val(JSON.stringify(uploadImages));
-     });
-     </script>
-</f:section>
+    <div class="form-group">
+        <label for="type" class="col-sm-4 control-label">Art</label>
+        <div class="col-sm-8">
+            <f:form.select property="type" options="{operationTypes}" class="form-control" optionLabelField="label" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="date" class="col-sm-4 control-label">Datum</label>
+        <f:form.hidden property="date" id="datetime" value="{operation.date -> f:format.date( format: 'd.m.Y H:i' )}" additionalAttributes="{required: required}" />
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-xs-7 date">
+                    <input type="text" id="date" class="form-control" required="required" />
+                </div>
+                <div class="col-xs-5">
+                    <input type="text" id="time" class="form-control exacttime" required="required" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="location" class="col-sm-4 control-label">Ort</label>
+        <div class="col-sm-8">
+            <f:form.textfield property="location" id="location" class="form-control" additionalAttributes="{required: required}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="uploadForm" class="col-sm-4 control-label">Fotos</label>
+        <div class="col-sm-8">
+            <div id="uploaded">
+                <f:for each="{operation.images}" as="image">
+                    <div>
+                        <div class="remove" data-id="{image.identifier}"></div>
+                        <img src="{media:uri.image(asset: image, maximumHeight: 100, maximumWidth: 100, allowCropping: true)}" alt="" />
+                    </div>
+                </f:for>
+            </div>
+
+            <button type="button" id="uploadFormButton" class="btn btn-default"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Beschreibung</label>
+        <div class="col-sm-8">
+            <f:form.textarea rows="5" property="description" id="description" class="form-control" additionalAttributes="{required: required}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="bos" class="col-sm-4 control-label">Weitere Kräfte</label>
+        <div class="col-sm-8 operationBos">
+            <f:for each="{operationBos}" as="bos">
+                <div class="checkbox-inline">
+                    <label>
+                  <f:form.checkbox property="bos" checked="{bos.checked}" multiple="true" value="{bos}" id="{bos.name}" />
+               <span>{bos.name}</span></label>
+                </div>
+            </f:for>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="button" class="goback btn btn-default"><i class="fa fa-ban" aria-hidden="true"></i> Abbrechen</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Änderungen speichern</button>
+
+            <f:form.hidden name="images" value="{images}" id="imagesInput" />
+        </div>
+    </div>
+</f:form>
+
+<form action="../../../upload.json" id="uploadForm" method="post" enctype="multipart/form-data" class="hidden">
+    <input type="hidden" name="protection" value="{csrfProtectionToken}" />
+    <input type="file" name="image[resource]" multiple="true" />
+</form>
+
+<script src="{f:uri.resource(path: '/Libraries/jQuery/jquery-2.0.2.min.js', package: 'TYPO3.Twitter.Bootstrap')}"></script>
+<script src="{f:uri.resource(path: 'Vendor/_vendor.min.js', package: 'DRKTettnang.Homepage')}"></script>
+
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.ui/jquery-ui.min.js')}"></script>
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Vendor/jquery.fileupload/jquery.fileupload.js')}"></script>
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Javascripts/operation.form.js')}"></script>

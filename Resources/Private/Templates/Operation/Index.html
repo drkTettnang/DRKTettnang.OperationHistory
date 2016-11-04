@@ -1,28 +1,54 @@
 {namespace media=TYPO3\Media\ViewHelpers}
+<f:layout name="Default" />
 
+<f:section name="ContentTop">
+    <f:security.ifHasRole role="Moderator">
+       <p class="text-right">
+           <f:form actionUri="/neos/logout" method="post" style="display:inline">
+               <f:form.submit class="btn btn-default" value="Abmelden" />
+           </f:form>
+           <f:link.action action="new" class="btn btn-default"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neuen Einsatz erstellen</f:link.action>
+       </p>
+    </f:security.ifHasRole>
+</f:section>
+
+<f:section name="Content">
+
+    <div class="statistic">
+        <f:for each="{typeStatistic}" as="t">
+            <div class="type">
+                <div data-value="{t.count}" class="value">{t.count}</div>
+                {t.label}
+            </div>
+        </f:for>
+        <div style="clear:both;"></div>
+    </div>
 
     <f:if condition="{operations}">
         <f:then>
-               <f:widget.paginate objects="{operations}" as="os" configuration="{itemsPerPage: 2}">
-                  <f:for each="{os}" as="operation">
+            <f:widget.paginate objects="{operations}" as="os" configuration="{itemsPerPage: 10}">
+                <f:for each="{os}" as="operation">
                     <f:render partial="Operation" arguments="{operation:operation}" />
-                  </f:for>
-               </f:widget.paginate> 
-               <f:comment>
-                <f:for each="{operations}" as="operation">
-                  <f:render partial="Operation" arguments="{operation:operation}" />
                 </f:for>
-                </f:comment>
+            </f:widget.paginate>
+            <f:comment>
+                <f:for each="{operations}" as="operation">
+                    <f:render partial="Operation" arguments="{operation:operation}" />
+                </f:for>
+            </f:comment>
         </f:then>
         <f:else>
-            <p>No operations created yet.</p>
+            <p>Keine Einsätze eingetragen.</p>
         </f:else>
     </f:if>
-    <p><f:link.action action="new">Create a new operation</f:link.action></p>
     
-    <f:for each="{years}" as="year">
-      <f:link.action action="index" arguments="{year: year}">{year}</f:link.action>,
-   </f:for>
-   
-   <p><f:link.action controller="operationBos" action="index">Show BOS</f:link.action> 
-      <f:link.action controller="operationType" action="index">Show types</f:link.action></p>
+    <f:security.ifHasRole role="Moderator">
+       <p class="text-right">
+           <f:link.action action="new" class="btn btn-default"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neuen Einsatz erstellen</f:link.action>&nbsp;
+           <f:link.action class="btn btn-default" controller="operationBos" action="index">Andere Kräfte</f:link.action>&nbsp;
+           <f:link.action class="btn btn-default" controller="operationType" action="index">Einsatztypen</f:link.action>
+       </p>
+    </f:security.ifHasRole>
+
+    <script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Javascripts/operation.js')}"></script>
+</f:section>

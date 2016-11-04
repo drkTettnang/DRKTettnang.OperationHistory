@@ -4,3 +4,9 @@
   ui:
     label: 'Einsatzübersicht'
     group: 'plugins'
+'DRKTettnang.OperationHistory:PluginLast':
+  superTypes:
+    'TYPO3.Neos:Plugin': TRUE
+  ui:
+    label: 'Letzter Einsatz'
+    group: 'plugins'

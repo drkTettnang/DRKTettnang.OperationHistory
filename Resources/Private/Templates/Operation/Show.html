@@ -1,3 +1,7 @@
-<f:flashMessages class="flashmessages" />
+<f:layout name="Default" />
 
+<f:section name="Content">
 <f:render partial="Operation" arguments="{operation:operation}" />
+
+<script src="{f:uri.resource(package:'DRKTettnang.OperationHistory', path: 'Javascripts/operation.js')}"></script>
+</f:section>

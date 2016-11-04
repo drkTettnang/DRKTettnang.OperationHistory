@@ -1,3 +1,26 @@
+<nav id="year-nav" class="dropdown visible-xs-block">
+ <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    {f:if(condition: currentYear, then: currentYear, else: 'Jahr')}
+    <span class="caret"></span>
+ </button>
+ <ul class="dropdown-menu dropdown-menu-right">
+    <f:for each="{years}" as="year">
+      <f:if condition="{currentYear} == {year}">
+         <f:then>
+            <li class="current"><f:link.action action="index" absolute="false" arguments="{year: year}">{year}</f:link.action></li>
+         </f:then>
+         <f:else>
+            <li class="normal"><f:link.action action="index" absolute="false" arguments="{year: year}">{year}</f:link.action></li>
+         </f:else>
+      </f:if>
+    </f:for>
+ </ul>
+</nav>
+
+<f:render section="ContentTop" optional="true" />
+
+<div style="clear:both"></div>
+
 <f:flashMessages class="flashmessages" />
 
-        <f:render section="Content" />
+<f:render section="Content" />
