@@ -7,7 +7,7 @@
 
         if (nextUrl) {
             var more = $('<a>');
-            more.addClass('nextOperations');
+            more.addClass('moreOperations');
             more.append('<span>Mehr</span>');
             more.click(function() {
                 $(this).remove();
