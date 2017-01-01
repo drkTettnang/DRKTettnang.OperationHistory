@@ -1,6 +1,37 @@
 (function() {
     "use strict";
 
+    function showNextOperations(dom) {
+        var nav = dom.find('.page-navigation');
+        var nextUrl = nav.find('.next a').attr('href');
+
+        if (nextUrl) {
+            var more = $('<a>');
+            more.addClass('nextOperations');
+            more.append('<span>Mehr</span>');
+            more.click(function() {
+                $(this).remove();
+
+                $.ajax({
+                    url: nextUrl,
+                    success: function(data) {
+                        data = $(data);
+
+                        $('.operation').last().after(data.find('.operation'));
+                        $('.operation').last().after(data.find('.page-navigation'));
+
+                        fitGallery($('.gallery'));
+
+                        showNextOperations($('body'));
+                    }
+                });
+            });
+            nav.after(more);
+        }
+
+        nav.remove();
+    }
+
     function operationInit() {
         if (typeof jQuery === 'undefined') {
             setTimeout(function() {
@@ -9,6 +40,8 @@
             return;
         }
         var $ = jQuery;
+
+        showNextOperations($('body'));
 
         var currentSecNavEl = $('#sub-nav .current');
         if (currentSecNavEl.find('ul').length === 0) {
