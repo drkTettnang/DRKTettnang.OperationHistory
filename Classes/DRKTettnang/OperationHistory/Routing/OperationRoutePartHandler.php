@@ -32,7 +32,7 @@ class OperationRoutePartHandler extends DynamicRoutePart
 
     protected function matchValue($requestPath)
     {
-        if (!preg_match('/([0-9]{4})\/([0-9])+/', $requestPath, $matches)) {
+        if (!preg_match('/([0-9]{4})\/([0-9]+)/', $requestPath, $matches)) {
             return false;
         }
         $year = $matches[1];
