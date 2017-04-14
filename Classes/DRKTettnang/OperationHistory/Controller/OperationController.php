@@ -419,6 +419,8 @@ class OperationController extends ActionController
                $images[] = $a->__identifier;
             }
             $operation->setImages($images);
+         } else {
+            $operation->setImages(array());
          }
 
          $operations[] = $operation;
