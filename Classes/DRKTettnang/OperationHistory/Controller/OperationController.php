@@ -150,7 +150,7 @@ class OperationController extends ActionController
    {
       $operation = $this->operationRepository->findLatest();
 
-      $this->forward('show', null, null, array('operation' => $operation));
+      $this->view->assign('operation', $operation);
    }
 
    /**
