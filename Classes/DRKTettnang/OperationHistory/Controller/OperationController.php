@@ -20,7 +20,7 @@ class OperationController extends ActionController
 {
    /**
     * @Flow\Inject
-    * 
+    *
     * @var CsrfProtectionToken
     */
    protected $csrfProtectionToken;
@@ -31,7 +31,7 @@ class OperationController extends ActionController
     * @var \TYPO3\Media\Domain\Repository\AssetCollectionRepository
     */
    protected $assetCollectionRepository;
-   
+
    /**
     * @Flow\Inject
     *
@@ -102,10 +102,10 @@ class OperationController extends ActionController
 
    /**
     * Assign years in every action.
-    * 
+    *
     * @param  ViewInterface $view
     */
-   public function initializeView(ViewInterface $view)
+   public function initializeView($view)
    {
       $this->view->assign('years', $this->operationRepository->findYears());
 
@@ -134,7 +134,7 @@ class OperationController extends ActionController
 
    /**
     * Show single operation.
-    * 
+    *
     * @param \DRKTettnang\OperationHistory\Domain\Model\Operation $operation
     */
    public function showAction($operation)
@@ -178,12 +178,12 @@ class OperationController extends ActionController
 
    /**
     * Create new operation.
-    * 
+    *
     * @param \DRKTettnang\OperationHistory\Domain\Model\Operation $newOperation
-    * @param string                                               $images
+    * @param string $images
     * @Flow\Validate(argumentName="$newOperation", type="UniqueEntity", options={"identityProperties"={"date"}})
     */
-   public function createAction(Operation $newOperation, string $images)
+   public function createAction($newOperation, $images)
    {
       $this->csrfProtectionToken->delete();
 
@@ -211,10 +211,10 @@ class OperationController extends ActionController
 
    /**
     * Show operation update form.
-    * 
+    *
     * @param \DRKTettnang\OperationHistory\Domain\Model\Operation $operation
     */
-   public function editAction(Operation $operation)
+   public function editAction($operation)
    {
       // assign csrf protection token, because upload action is reachable for everone
       $this->view->assign('csrfProtectionToken', $this->csrfProtectionToken->get());
@@ -246,12 +246,12 @@ class OperationController extends ActionController
 
    /**
     * Update given operation.
-    * 
+    *
     * @param \DRKTettnang\OperationHistory\Domain\Model\Operation $operation
     * @param string                                               $images
     * @Flow\Validate(argumentName="$operation", type="UniqueEntity", options={"identityProperties"={"date"}})
     */
-   public function updateAction(Operation $operation, string $images)
+   public function updateAction($operation, $images)
    {
       // make token invalid
       $this->csrfProtectionToken->delete();
@@ -274,10 +274,10 @@ class OperationController extends ActionController
 
    /**
     * Delete given operation.
-    * 
+    *
     * @param \DRKTettnang\OperationHistory\Domain\Model\Operation $operation
     */
-   public function deleteAction(Operation $operation)
+   public function deleteAction($operation)
    {
       $this->operationRepository->remove($operation);
       $this->addFlashMessage('Deleted a operation.');
@@ -297,14 +297,14 @@ class OperationController extends ActionController
          true
       );
    }
-   
+
    /**
     * Save uploaded image in Upload collection.
-    * 
+    *
     * @param \TYPO3\Media\Domain\Model\Image $image
     * @param string $protection
     */
-   public function uploadAction(\TYPO3\Media\Domain\Model\Image $image, $protection)
+   public function uploadAction($image, $protection)
    {
       // We need to use our own csrf protection token, because this action is reachable by everone
       if (!$this->csrfProtectionToken->verify($protection)) {
