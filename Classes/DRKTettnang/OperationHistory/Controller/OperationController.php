@@ -366,6 +366,7 @@ class OperationController extends ActionController
       );
 
       $name = array(
+         'segf' => 'SEG Führung',
          'segg' => 'SEG groß',
          'segk' => 'SEG klein',
          'btr' => 'Betreuung und Logistik',
