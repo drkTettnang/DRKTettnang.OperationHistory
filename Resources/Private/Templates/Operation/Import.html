@@ -1,5 +1,7 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 
+<p><f:link.action action="import" arguments="{offset: offset}">Weitere {offset} importieren</f:link></p>
+
     <f:if condition="{operations}">
         <f:then>
                 <f:for each="{operations}" as="operation">
