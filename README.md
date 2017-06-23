@@ -18,3 +18,19 @@
     OperationHistoryPluginSubroutes:
       package: 'DRKTettnang.OperationHistory'
 ```
+
+## Screenshots
+
+---
+
+![](https://raw.githubusercontent.com/drkTettnang/DRKTettnang.OperationHistory/master/Documentation/screenshot-1.png)
+
+---
+
+![](https://raw.githubusercontent.com/drkTettnang/DRKTettnang.OperationHistory/master/Documentation/screenshot-2.png)
+
+---
+
+![](https://raw.githubusercontent.com/drkTettnang/DRKTettnang.OperationHistory/master/Documentation/screenshot-3.png)
+
+---
