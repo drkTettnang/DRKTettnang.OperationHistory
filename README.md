@@ -8,10 +8,6 @@
 - execute database update with `./flow doctrine:update`
 - activate user role `Moderator` for desired users
 
-## Troubleshooting
-
-- On php 7 add `\TYPO3\Flow\Mvc\View\ViewInterface` to `Controller/OperationController.php line 466`
-
 ## Snippets
 ### Snippet 1
 ```

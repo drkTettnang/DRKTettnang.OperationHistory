@@ -105,7 +105,7 @@ class OperationController extends ActionController
     *
     * @param  ViewInterface $view
     */
-   public function initializeView($view)
+   public function initializeView(\TYPO3\Flow\Mvc\View\ViewInterface $view)
    {
       $this->view->assign('years', $this->operationRepository->findYears());
 
