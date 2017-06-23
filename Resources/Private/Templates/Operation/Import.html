@@ -1,6 +1,6 @@
 {namespace media=TYPO3\Media\ViewHelpers}
 
-<p><f:link.action action="import" arguments="{offset: offset}">Weitere {offset} importieren</f:link></p>
+<p>Insgesamt {offset} Datensätze importiert. <f:link.action action="import" arguments="{offset: offset}">Weitere importieren.</f:link.action></p>
 
     <f:if condition="{operations}">
         <f:then>

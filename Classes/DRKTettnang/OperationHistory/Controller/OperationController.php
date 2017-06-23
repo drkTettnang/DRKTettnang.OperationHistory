@@ -346,11 +346,13 @@ class OperationController extends ActionController
    /**
     * Import old operations and create operation type and bos. Use with care,
     * because no duplication check is included.
+    *
+    * @param int [$offset]
     */
    public function importAction($offset = 0)
    {
-      $limit = 50;
-      $oldOperations = $this->operationRepository->getOldOperations($offset + $limit, $limit);
+      $limit = 100;
+      $oldOperations = $this->operationRepository->getOldOperations($offset, $limit);
       $operations = [];
 
       $long = array(
