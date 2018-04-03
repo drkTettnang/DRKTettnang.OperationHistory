@@ -91,7 +91,7 @@ class OperationRepository extends Repository
          $query->matching(
             $query->equals('year', $year)
          )
-         ->setOrderings(array('date' =>  \Neos\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
+         ->setOrderings(array('date' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
          ->execute();
    }
 
@@ -119,12 +119,14 @@ class OperationRepository extends Repository
       return $query->getResult();
    }
 
-   public function getOldOperations() {
+   public function getOldOperations($start, $limit) {
       $rsm = new ResultSetMapping();
       $rsm->addScalarResult('properties', 'properties');
 
-      $query = $this->entityManager->createNativeQuery('SELECT properties FROM typo3_typo3cr_domain_model_nodedata WHERE nodetype = ? LIMIT 5', $rsm);
+      $query = $this->entityManager->createNativeQuery('SELECT properties FROM typo3_typo3cr_domain_model_nodedata WHERE nodetype = ? LIMIT ?, ?', $rsm);
       $query->setParameter(1, 'DRKTettnang.Homepage:Operation');
+      $query->setParameter(2, $start);
+      $query->setParameter(3, $limit);
 
       $result = $query->getResult();
 

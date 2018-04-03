@@ -348,10 +348,13 @@ class OperationController extends ActionController
    /**
     * Import old operations and create operation type and bos. Use with care,
     * because no duplication check is included.
+    *
+    * @param int [$offset]
     */
-   public function importAction()
+   public function importAction($offset = 0)
    {
-      $oldOperations = $this->operationRepository->getOldOperations();
+      $limit = 100;
+      $oldOperations = $this->operationRepository->getOldOperations($offset, $limit);
       $operations = [];
 
       $long = array(
@@ -430,6 +433,8 @@ class OperationController extends ActionController
          $this->persistenceManager->whiteListObject($operation);
          $this->operationRepository->add($operation);
       }
+
+      $this->view->assign('offset', $offset + $limit);
       $this->view->assign('operations', $operations);
    }
 

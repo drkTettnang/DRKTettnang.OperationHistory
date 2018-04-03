@@ -11,7 +11,7 @@
 
 	<div class="body">
 		<p class="description">
-			{operation.description -> f:format.htmlspecialchars() -> f:format.raw()} <!-- -> drk:format.linebreak() -->
+			{operation.description -> f:format.htmlspecialchars() -> drk:format.linebreak() -> f:format.raw()}
 		</p>
 
 		<f:if condition="{operation.images}">
