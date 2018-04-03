@@ -1,7 +1,11 @@
-TYPO3:
+Neos:
+  Neos:
+    fusion:
+      autoInclude:
+        'DRKTettnang.OperationHistory': TRUE
   Flow:
     security:
       authentication:
         providers:
-          Typo3BackendProvider:
+          NeosBackendProvider:
             provider: 'PersistedUsernamePasswordProvider'

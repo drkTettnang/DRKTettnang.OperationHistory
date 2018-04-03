@@ -1,11 +1,11 @@
-{namespace media=TYPO3\Media\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
 {namespace drk=DRKTettnang\Homepage\ViewHelpers}
 <div class="operation animatedParent animateOnce">
 	<h1 class="type">
 		<span class="number animated growIn">
 			#{operation.number}
 		</span>
-		
+
 		{operation.type.label}
 	</h1>
 
@@ -13,18 +13,18 @@
 		<p class="description">
 			{operation.description -> f:format.htmlspecialchars() -> f:format.raw()} <!-- -> drk:format.linebreak() -->
 		</p>
-		
+
 		<f:if condition="{operation.images}">
 			<div class="images gallery">
 	         <f:for each="{operation.images}" as="image">
-	            <a href="{media:uri.image(asset: image, maximumHeight: 2000, maximumWidth: 2000, allowCropping: false)}" 
-	               data-bg-url-max="{media:uri.image(asset: image, maximumWidth: 720, allowCropping: false)}" 
-	               data-bg-url-square="{media:uri.image(asset: image, height: 720, width: 720, allowCropping: true)}" 
-	               data-bg-url-large="{media:uri.image(asset: image, height: 150, width: 720, allowCropping: true)}" 
-	               data-bg-url-medium="{media:uri.image(asset: image, height: 130, width: 240, allowCropping: true)}" 
-	               style="background-image:url({media:uri.image(asset: image, height: 120, width: 120, allowCropping: true)})"></a>
+	            <a href="{media:uri.image(image: image, maximumHeight: 2000, maximumWidth: 2000, allowCropping: false)}"
+	               data-bg-url-max="{media:uri.image(image: image, maximumWidth: 720, allowCropping: false)}"
+	               data-bg-url-square="{media:uri.image(image: image, height: 720, width: 720, allowCropping: true)}"
+	               data-bg-url-large="{media:uri.image(image: image, height: 150, width: 720, allowCropping: true)}"
+	               data-bg-url-medium="{media:uri.image(image: image, height: 130, width: 240, allowCropping: true)}"
+	               style="background-image:url({media:uri.image(image: image, height: 120, width: 120, allowCropping: true)})"></a>
 	         </f:for>
-	      </div> 
+	      </div>
 		</f:if>
 	</div>
 
@@ -36,9 +36,9 @@
 		<div class="date">
 			<span class="fa fa-calendar"></span> {operation.date -> f:format.date(cldrFormat: 'd. MMM, H:mm', forceLocale:'de_DE')}
 		</div>
-		
+
 		<div style="clear:both"></div>
-		
+
 		<f:if condition="{operation.bos}">
 			<!--<br />-->
 			<div class="bos">
@@ -47,13 +47,13 @@
 				</f:for>
 			</div>
 		</f:if>
-		
+
 		<div style="clear:both"></div>
 	</div>
-   
+
 	<f:security.ifHasRole role="Moderator">
 	   <div class="controls">
-			<f:link.action action="show" arguments="{operation: operation}"><i class="fa fa-eye" aria-hidden="true"></i> Details</f:link.action> 
+			<f:link.action action="show" arguments="{operation: operation}"><i class="fa fa-eye" aria-hidden="true"></i> Details</f:link.action>
 	      <f:link.action action="edit" arguments="{operation: operation}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Bearbeiten</f:link.action>
 	      <f:form action="delete" arguments="{operation: operation}">
 	          <f:form.button class="deleteOperation"><i class="fa fa-trash" aria-hidden="true"></i> Löschen</f:form.button>

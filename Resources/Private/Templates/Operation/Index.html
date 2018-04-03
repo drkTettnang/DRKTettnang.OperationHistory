@@ -1,4 +1,3 @@
-{namespace media=TYPO3\Media\ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="ContentTop">
@@ -41,7 +40,7 @@
             <p>Keine Einsätze eingetragen.</p>
         </f:else>
     </f:if>
-    
+
     <f:security.ifHasRole role="Moderator">
        <p class="text-right">
            <f:link.action action="new" class="btn btn-default"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Neuen Einsatz erstellen</f:link.action>&nbsp;

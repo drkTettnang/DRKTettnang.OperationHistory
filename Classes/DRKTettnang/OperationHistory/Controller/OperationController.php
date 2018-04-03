@@ -6,15 +6,17 @@ namespace DRKTettnang\OperationHistory\Controller;
  * This file is part of the DRKTettnang.OperationHistory package.
  */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Controller\ActionController;
 use DRKTettnang\OperationHistory\CsrfProtectionToken;
 use DRKTettnang\OperationHistory\Domain\Model\Operation;
 use DRKTettnang\OperationHistory\Domain\Model\OperationBos;
 use DRKTettnang\OperationHistory\Domain\Model\OperationType;
-use TYPO3\Media\Domain\Model\ThumbnailConfiguration;
-use TYPO3\Flow\Mvc\View\ViewInterface;
-use TYPO3\Flow\Session\SessionInterface;
+use Neos\Media\Domain\Model\ThumbnailConfiguration;
+use Neos\Flow\Mvc\View\ViewInterface;
+use Neos\Flow\Session\SessionInterface;
+use Neos\FluidAdaptor\View\TemplateView;
+use Neos\Flow\Mvc\View\JsonView;
 
 class OperationController extends ActionController
 {
@@ -28,35 +30,35 @@ class OperationController extends ActionController
    /**
     * @Flow\Inject
     *
-    * @var \TYPO3\Media\Domain\Repository\AssetCollectionRepository
+    * @var \Neos\Media\Domain\Repository\AssetCollectionRepository
     */
    protected $assetCollectionRepository;
 
    /**
     * @Flow\Inject
     *
-    * @var \TYPO3\Media\Domain\Service\AssetService
+    * @var \Neos\Media\Domain\Service\AssetService
     */
    protected $assetService;
 
    /**
     * @Flow\Inject
     *
-    * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+    * @var \Neos\Flow\Persistence\PersistenceManagerInterface
     */
    protected $persistenceManager;
 
    /**
     * @Flow\Inject
     *
-    * @var TYPO3\Media\Domain\Repository\AssetRepository
+    * @var Neos\Media\Domain\Repository\AssetRepository
     */
    protected $assetRepository;
 
    /**
     * @Flow\Inject
     *
-    * @var \TYPO3\Flow\Resource\ResourceManager
+    * @var \Neos\Flow\ResourceManagement\ResourceManager
     */
    protected $resourceManager;
 
@@ -85,8 +87,8 @@ class OperationController extends ActionController
     * @var array
     */
    protected $viewFormatToObjectNameMap = array(
-      'html' => 'TYPO3\Fluid\View\TemplateView',
-      'json' => 'TYPO3\Flow\Mvc\View\JsonView',
+      'html' => TemplateView::class,
+      'json' => JsonView::class,
    );
 
    /**
@@ -105,7 +107,7 @@ class OperationController extends ActionController
     *
     * @param  ViewInterface $view
     */
-   public function initializeView($view)
+   public function initializeView(ViewInterface $view)
    {
       $this->view->assign('years', $this->operationRepository->findYears());
 
@@ -170,8 +172,8 @@ class OperationController extends ActionController
    {
       $mappingConfig = $this->arguments['newOperation']->getPropertyMappingConfiguration();
       $mappingConfig->forProperty('date')->setTypeConverterOption(
-         'TYPO3\Flow\Property\TypeConverter\DateTimeConverter',
-         \TYPO3\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+         'Neos\Flow\Property\TypeConverter\DateTimeConverter',
+         \Neos\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
          'd.m.Y H:i'
       );
    }
@@ -238,8 +240,8 @@ class OperationController extends ActionController
    {
       $mappingConfig = $this->arguments['operation']->getPropertyMappingConfiguration();
       $mappingConfig->forProperty('date')->setTypeConverterOption(
-         'TYPO3\Flow\Property\TypeConverter\DateTimeConverter',
-         \TYPO3\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+         'Neos\Flow\Property\TypeConverter\DateTimeConverter',
+         \Neos\Flow\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT,
          'd.m.Y H:i'
       );
    }
@@ -292,8 +294,8 @@ class OperationController extends ActionController
       $commentConfiguration = $this->arguments['image']->getPropertyMappingConfiguration();
       $commentConfiguration->allowAllProperties();
       $commentConfiguration->setTypeConverterOption(
-         \TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter::class,
-         \TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+         \Neos\Flow\Property\TypeConverter\PersistentObjectConverter::class,
+         \Neos\Flow\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
          true
       );
    }
@@ -301,7 +303,7 @@ class OperationController extends ActionController
    /**
     * Save uploaded image in Upload collection.
     *
-    * @param \TYPO3\Media\Domain\Model\Image $image
+    * @param \Neos\Media\Domain\Model\Image $image
     * @param string $protection
     */
    public function uploadAction($image, $protection)
@@ -317,7 +319,7 @@ class OperationController extends ActionController
       // Check if Upload collection exists
       $collection = $this->assetCollectionRepository->findByTitle('Upload')->getFirst();
       if ($collection === null) {
-         $collection = new \TYPO3\Media\Domain\Model\AssetCollection('Upload');
+         $collection = new \Neos\Media\Domain\Model\AssetCollection('Upload');
          $this->assetCollectionRepository->add($collection);
       }
 

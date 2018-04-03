@@ -1,20 +1,20 @@
-<?php 
+<?php
 
 namespace DRKTettnang\OperationHistory;
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Utility;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Utility;
 
 /**
  * @Flow\Scope("session")
  */
 class CsrfProtectionToken {
-   
+
    /**
     * @var string
     */
    protected $token = null;
-   
+
    /**
     * @return string
     * @Flow\Session(autoStart = TRUE)
@@ -23,10 +23,10 @@ class CsrfProtectionToken {
       if ($this->token == null) {
          $this->token = Utility\Algorithms::generateRandomString(32);
       }
-      
+
       return $this->token;
    }
-   
+
    /**
     * @param  string $t
     * @return boolean
@@ -34,7 +34,7 @@ class CsrfProtectionToken {
    public function verify($t) {
       return $this->token != null && $this->token == $t;
    }
-   
+
    /**
     * @return void
     */

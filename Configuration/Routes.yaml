@@ -8,13 +8,13 @@
       '@format': 'json'
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
 -
   name: 'New Plugin Route'
   uriPattern: '{node}/new.{@format}'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
@@ -25,13 +25,13 @@
       '@format': 'html'
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
 -
   name: 'Import Plugin Route'
   uriPattern: '{node}/import.{@format}'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
@@ -42,13 +42,13 @@
       '@format': 'html'
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
 -
   name: 'Login Helper Route'
   uriPattern: '{node}/login.html'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
@@ -59,13 +59,13 @@
       '@format': 'html'
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
 -
   name: 'Year Route'
   uriPattern: '{node}(/~/{--drktettnang_operationhistory-plugin.year}).{@format}'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
@@ -74,16 +74,17 @@
       '@controller': 'Operation'
       '@action': 'index'
       '@format': 'html'
+      'year': ''
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
 #    '--drktettnang_operationhistory-plugin.operation':
 #      handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
 -
   name: 'Operation Route'
   uriPattern: '{node}/~/{--drktettnang_operationhistory-plugin.operation}(/{--drktettnang_operationhistory-plugin.@action}).{@format}'
   defaults:
-    '@package': 'TYPO3.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
@@ -94,7 +95,7 @@
       '@format': 'html'
   routeParts:
     node:
-      handler:    TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler:    Neos\Neos\Routing\FrontendNodeRoutePartHandler
     '--drktettnang_operationhistory-plugin.operation':
       handler:   'DRKTettnang\OperationHistory\Routing\OperationRoutePartHandler'
 

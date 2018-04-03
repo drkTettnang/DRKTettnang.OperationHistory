@@ -2,8 +2,8 @@
 
 namespace DRKTettnang\OperationHistory\Routing;
 
-use TYPO3\Flow\Mvc\Routing\DynamicRoutePart;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Routing\DynamicRoutePart;
+use Neos\Flow\Annotations as Flow;
 use DRKTettnang\OperationHistory\Domain\Model\Operation;
 
 class OperationRoutePartHandler extends DynamicRoutePart

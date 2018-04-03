@@ -5,7 +5,7 @@ namespace DRKTettnang\OperationHistory\Domain\Model;
  * This file is part of the DRKTettnang.OperationHistory package.
  */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -17,17 +17,17 @@ class Operation
     /**
      * @Flow\Inject
      *
-     * @var TYPO3\Media\Domain\Repository\AssetRepository
+     * @var \Neos\Media\Domain\Repository\AssetRepository
      */
     protected $assetRepository;
-    
+
     /**
     * @Flow\Inject
     *
-    * @var \TYPO3\Flow\Resource\ResourceManager
+    * @var \Neos\Flow\ResourceManagement\ResourceManager
     */
     protected $resourceManager;
-    
+
     /**
     * @Flow\Inject
     *
@@ -68,7 +68,7 @@ class Operation
      * @Flow\Validate(type="NotEmpty")
      */
     protected $date;
-    
+
     /**
      * @var integer
      */
@@ -84,7 +84,7 @@ class Operation
      * @var array<string>
      */
     protected $images;//\TYPO3\Media\Domain\Model\Image
-    
+
     /**
      * @return string
      */
@@ -186,7 +186,7 @@ class Operation
     {
         $this->date = $date;
     }
-    
+
     /**
      * @return integer
      */
@@ -220,18 +220,18 @@ class Operation
     {
         $this->fb_post_id = $fb_post_id;
     }
-    
+
     public function getJsonImages() {
       return json_encode($this->images);
    }
-    
+
     /**
-     * @return array<\TYPO3\Media\Domain\Model\Image>
+     * @return array<\Neos\Media\Domain\Model\Image>
      */
     public function getImages()
     {
       $images = array();
-      
+
       if (is_array($this->images)) {
          foreach ($this->images as $identifier) {
             $asset = $this->assetRepository->findByIdentifier($identifier);

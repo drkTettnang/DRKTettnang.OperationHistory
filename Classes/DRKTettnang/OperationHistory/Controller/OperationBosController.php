@@ -5,8 +5,8 @@ namespace DRKTettnang\OperationHistory\Controller;
  * This file is part of the DRKTettnang.OperationHistory package.
  */
 
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\ActionController;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Mvc\Controller\ActionController;
 use DRKTettnang\OperationHistory\Domain\Model\OperationBos;
 
 class OperationBosController extends ActionController

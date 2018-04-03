@@ -1,5 +1,5 @@
 privilegeTargets:
-  TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
+  Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege:
     'DRKTettnang.OperationHistory:ReadControllerActions':
       matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation)Controller->(index|show|showLatest|upload)Action())'
     'DRKTettnang.OperationHistory:DestructiveControllerActions':
@@ -7,7 +7,7 @@ privilegeTargets:
     'DRKTettnang.OperationHistory:AdminControllerActions':
       matcher: 'method(DRKTettnang\OperationHistory\Controller\(Operation)Controller->(import)Action())'
 roles:
-  'TYPO3.Flow:Everybody':
+  'Neos.Flow:Everybody':
     privileges:
       -
         privilegeTarget: 'DRKTettnang.OperationHistory:ReadControllerActions'
@@ -20,7 +20,7 @@ roles:
       -
          privilegeTarget: 'DRKTettnang.OperationHistory:DestructiveControllerActions'
          permission: GRANT
-  'TYPO3.Neos:Administrator':
+  'Neos.Neos:Administrator':
      privileges:
         -
            privilegeTarget: 'DRKTettnang.OperationHistory:AdminControllerActions'

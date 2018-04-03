@@ -2,7 +2,7 @@
     "description": "Add description here",
     "type": "neos-package",
     "require": {
-        "typo3/flow": "*"
+        "neos/flow": "*"
     },
     "name": "drktettnang/operationhistory",
     "autoload": {

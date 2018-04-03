@@ -5,7 +5,7 @@ namespace DRKTettnang\OperationHistory\Domain\Model;
  * This file is part of the DRKTettnang.OperationHistory package.
  */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

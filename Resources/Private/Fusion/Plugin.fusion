@@ -1,11 +1,11 @@
-prototype(DRKTettnang.OperationHistory:Plugin) < prototype(TYPO3.Neos:Plugin)
+prototype(DRKTettnang.OperationHistory:Plugin) < prototype(Neos.Neos:Plugin)
 prototype(DRKTettnang.OperationHistory:Plugin) {
       package = 'DRKTettnang.OperationHistory'
       controller = 'Operation'
       action = 'index'
 }
 
-prototype(DRKTettnang.OperationHistory:PluginLast) < prototype(TYPO3.Neos:Plugin)
+prototype(DRKTettnang.OperationHistory:PluginLast) < prototype(Neos.Neos:Plugin)
 prototype(DRKTettnang.OperationHistory:PluginLast) {
       package = 'DRKTettnang.OperationHistory'
       controller = 'Operation'

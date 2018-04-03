@@ -1,7 +1,7 @@
-include: Plugin.ts2
+include: Plugin.fusion
 
 
-json = TYPO3.TypoScript:Case {
+json = Neos.TypoScript:Case {
         operation {
                 condition = true
                 type = 'DRKTettnang.OperationHistory:Operation.Json'
@@ -9,7 +9,7 @@ json = TYPO3.TypoScript:Case {
 }
 
 
-prototype(DRKTettnang.OperationHistory:Operation.Json) < prototype(TYPO3.TypoScript:Http.Message) {
+prototype(DRKTettnang.OperationHistory:Operation.Json) < prototype(Neos.TypoScript:Http.Message) {
         httpResponseHead {
                 headers.Content-Type = 'application/json;charset=utf-8'
         }
