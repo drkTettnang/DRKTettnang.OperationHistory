@@ -7,6 +7,7 @@ namespace DRKTettnang\OperationHistory\Domain\Repository;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Repository;
+use Neos\Flow\Persistence\QueryInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
@@ -91,7 +92,7 @@ class OperationRepository extends Repository
          $query->matching(
             $query->equals('year', $year)
          )
-         ->setOrderings(array('date' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
+         ->setOrderings(array('date' =>  QueryInterface::ORDER_DESCENDING))
          ->execute();
    }
 
@@ -99,7 +100,7 @@ class OperationRepository extends Repository
 
       $query = $this->createQuery();
       $query
-         ->setOrderings(array('date' =>  \Neos\Flow\Persistence\QueryInterface::ORDER_DESCENDING))
+         ->setOrderings(array('date' =>  QueryInterface::ORDER_DESCENDING))
          ->setLimit(1);
 
       return $query->execute()->getFirst();
