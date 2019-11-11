@@ -42,7 +42,7 @@
                 <f:for each="{operation.images}" as="image">
                     <div>
                         <div class="remove" data-id="{image.identifier}"></div>
-                        <img src="{media:uri.image(asset: image, maximumHeight: 100, maximumWidth: 100, allowCropping: true)}" alt="" />
+                        <img src="{media:uri.image(image: image, maximumHeight: 100, maximumWidth: 100, allowCropping: true)}" alt="" />
                     </div>
                 </f:for>
             </div>
