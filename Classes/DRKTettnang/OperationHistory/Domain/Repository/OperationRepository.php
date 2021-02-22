@@ -5,6 +5,8 @@ namespace DRKTettnang\OperationHistory\Domain\Repository;
  * This file is part of the DRKTettnang.OperationHistory package.
  */
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Repository;
 use Neos\Flow\Persistence\QueryInterface;
@@ -17,15 +19,14 @@ class OperationRepository extends Repository
 {
    /**
      * @Flow\Inject
-     * @var \Doctrine\Common\Persistence\ObjectManager
+     * @var EntityManagerInterface
      */
    protected $entityManager;
 
    protected $defaultOrderings = array('date' => 'DESC');
 
    public function findYears() {
-
-      /** @var QueryBuilder $queryBuilder */
+      /** @var QueryBuilder */
       $queryBuilder = $this->entityManager->createQueryBuilder();
       $queryBuilder
             ->select('o.year')
