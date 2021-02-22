@@ -83,7 +83,7 @@ class Operation
      * @ORM\Column(type="flow_json_array")
      * @var array<string>
      */
-    protected $images;//\TYPO3\Media\Domain\Model\Image
+    protected $images;//\Neos\Media\Domain\Model\Image
 
     /**
      * @return string
