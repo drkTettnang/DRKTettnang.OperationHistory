@@ -197,7 +197,7 @@ class OperationController extends ActionController
 
       try {
          $images = json_decode($images);
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
       }
 
       if ($images === null || !is_array($images)) {
@@ -260,7 +260,7 @@ class OperationController extends ActionController
 
       try {
          $images = json_decode($images);
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
       }
 
       if ($images === null || !is_array($images)) {
